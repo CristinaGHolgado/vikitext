@@ -1,0 +1,11 @@
+README.md
+setup.py
+vikitext/__main__.py
+vikitext/article_links.py
+vikitext/hyperlinks.py
+vikitext.egg-info/PKG-INFO
+vikitext.egg-info/SOURCES.txt
+vikitext.egg-info/dependency_links.txt
+vikitext.egg-info/not-zip-safe
+vikitext.egg-info/requires.txt
+vikitext.egg-info/top_level.txt
