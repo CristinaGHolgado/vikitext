@@ -8,7 +8,7 @@ _url = []
 _clean_urls = []
 
 def source_hl(url):
-	'''Scrap over the site
+	'''Scrap all hyperlinks from Vikidia alphabetical index from the first hyperlink
 	
 	Parameters
 	----------
@@ -41,6 +41,7 @@ def main_hl():
 		url_src = url_src.split('"')
 		url_src = "https://fr.vikidia.org"+str(''.join([''.join(item) for item in url_src if item.startswith("/w/index")]))
 		_clean_urls.append(url_src.replace("&amp;","&"))
+	
 	else:
 		url_src = str(pass_url[-1]).split('"')
 		url_src = [''.join(item) for item in url_src if item.startswith("/w/index")]
@@ -52,19 +53,20 @@ def list_hl():
 	while source_hl(_clean_urls[-1]) == True:
 		main_hl()
 		print(_clean_urls[-1])
+	
 	else:
 		print("Finished")
 
 
 def hl_to_txt(url):
 	'''Save collected urls into a plain text file'''
-	with open("viki_hyperlinks.txt", 'w', encoding='utf8') as f:
-		f.write(url+'\n')
+	with open("vikidia_hyperlinks.txt", 'w', encoding='utf8') as f:
+		f.write(url + '\n')
 		for item in _clean_urls:
 			f.write("%s\n" % item)
 
 # main func
-def get_hl(hl):
+def get_hyperlinks(hl):
 	'''Generates a text file listing every hyperlink from the input site main hyperlink. Used to get links afterwards
 	Parameters
 	----------
@@ -75,3 +77,4 @@ def get_hl(hl):
 	main_hl()
 	list_hl()
 	hl_to_txt(hl)
+
