@@ -1,4 +1,3 @@
-import article_links
-import extract_hyperlinks
-from extract_hyperlinks import source_hl, main_hl, list_hl, hl_to_txt
-from article_links import make_linkset, make_urls, chunk_urls
+from extract_hyperlinks import get_hyperlinks as get_hl
+from article_links import make_urlset as get_urls
+from get_text import get_content as get_txt

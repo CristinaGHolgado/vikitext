@@ -2,6 +2,7 @@ README.md
 setup.py
 vikitext/__main__.py
 vikitext/article_links.py
+vikitext/get_text.py
 vikitext/hyperlinks.py
 vikitext.egg-info/PKG-INFO
 vikitext.egg-info/SOURCES.txt
