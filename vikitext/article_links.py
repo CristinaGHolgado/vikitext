@@ -29,7 +29,7 @@ def make_linkset(inputfile, split_nb=None):
 			If used, split output file containing all article links into n number of links per file
 
 	"""
-	raw_urls_articles = [] # liste des liens directs vers les articles (/wiki/[nom]) valables pour Wikipedia et Vikidia, extratis a partir des hyperliens de l'index alphabetique de Vikidia
+	raw_urls_articles = []
 	titles_articles = []
 
 	def get_links():
@@ -59,8 +59,8 @@ def make_linkset(inputfile, split_nb=None):
 
 	# Exclude irrelevant/empty urls
 	df_articles = df_articles.dropna()
-	df_articles = df_articles[~df_articles.TITLE.str.contains("Spécial:Index") & ~df_articles.TITLE.str.contains("Vikidia:")]
-	# df_articles = df_articles[~df_articles.TITLE.str.contains("Vikidia:")]
+	df_articles = df_articles[~df_articles.TITLE.str.contains("Spécial:Index")]
+	df_articles = df_articles[~df_articles.TITLE.str.contains("Vikidia:")]
 
 	# Add domain
 	df_articles['URL_WIKIPEDIA'] = "https://fr.wikipedia.org" + df_articles['URL']
