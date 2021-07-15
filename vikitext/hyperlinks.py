@@ -1,31 +1,32 @@
 from bs4 import BeautifulSoup
 import requests
 
-'''Extract hyperlinks from Vikidia (based on url: )
+'''
+module 1 : Return list of hyperlinks from the Vikidia alphabetical index
 '''
 
-_url = []
-_clean_urls = []
+_init_link = []
+_clean_init_links = []
 
-def source_hl(url):
-	'''Scrap all hyperlinks from Vikidia alphabetical index from the first hyperlink
+def source_hl(init_link):
+	'''Scrap links from Vikidia alphabetical index
 	
 	Parameters
 	----------
-	url : str
-		Input site hyperlink
+	init_link : str
+		main link from the index
 
 	Returns
 	-------
-		List
+		list
 	'''
 	
-	x = requests.get(url)
+	x = requests.get(init_link)
 	soup = BeautifulSoup(x.content, features='lxml')
 
 	for div in soup.findAll('div', {'class': 'mw-prefixindex-nav'}):
 		a = div.findAll('a', href=True)[0]
-		_url.append(a)
+		_init_link.append(a)
 		
 		if len(a) >= 1:
 			return True
@@ -34,47 +35,56 @@ def source_hl(url):
 
 
 def main_hl():
-	'''List all found hyperlinks starting with the fist appended (referent) as reference
-	to navigate to the next pages'''
-	if type(_url) == list and len(_url) >= 1:
-		url_src = str(_url[-1])
-		url_src = url_src.split('"')
-		url_src = "https://fr.vikidia.org"+str(''.join([''.join(item) for item in url_src if item.startswith("/w/index")]))
-		_clean_urls.append(url_src.replace("&amp;","&"))
+	'''
+	start iteration from last item in list
+	'''
+	if type(_init_link) == list and len(_init_link) >= 1:
+		init_link_src = str(_init_link[-1])
+		init_link_src = init_link_src.split('"')
+		init_link_src = "https://fr.vikidia.org" + str(''.join([''.join(item) for item in init_link_src if item.startswith("/w/index")]))
+		_clean_init_links.append(init_link_src.replace("&amp;","&"))
 	
 	else:
-		url_src = str(pass_url[-1]).split('"')
-		url_src = [''.join(item) for item in url_src if item.startswith("/w/index")]
-		_clean_urls.append(url_src)
+		init_link_src = str(pass_init_link[-1]).split('"')
+		init_link_src = [''.join(item) for item in init_link_src if item.startswith("/w/index")]
+		_clean_init_links.append(init_link_src)
 
 
 def list_hl():
-	'''Iterate over the site index pages'''
-	while source_hl(_clean_urls[-1]) == True:
+	'''
+	list all hyperlinks retrieved by iterating through the succeeding Vikidia Index pages starting from the source link
+	'''
+	while source_hl(_clean_init_links[-1]) == True:
 		main_hl()
-		print(_clean_urls[-1])
+		print(_clean_init_links[-1])
 	
 	else:
 		print("Finished")
 
 
-def hl_to_txt(url):
-	'''Save collected urls into a plain text file'''
-	with open("vikidia_hyperlinks.txt", 'w', encoding='utf8') as f:
-		f.write(url + '\n')
-		for item in _clean_urls:
+def hl_to_txt(init_link):
+	'''
+	list of links to text file
+	'''
+	with open("vikidia_src_links.txt", 'w', encoding='utf8') as f:
+		f.write(init_link + '\n')
+		for item in _clean_init_links:
 			f.write("%s\n" % item)
+	print(f"{len(_clean_init_links)} links retrieved")
 
 # main func
 def get_hyperlinks(hl):
-	'''Generates a text file listing every hyperlink from the input site main hyperlink. Used to get links afterwards
+	'''Run retrieving
+	
 	Parameters
 	----------
 	hl : str
-		Hyperlink to Vikidia alphabetical index. Recommended to hide redirects. Use : https://fr.vikidia.org//w//index.php?title=Sp%C3%A9cial%3AIndex&prefix=&namespace=0&hideredirects=1
+		Source link from Vikidia alphabetical index. Recommended to hide redirects.
+		Use : https://fr.vikidia.org//w//index.php?title=Sp%C3%A9cial%3AIndex&prefix=&namespace=0&hideredirects=1
 	'''
 	source_hl(hl)
 	main_hl()
 	list_hl()
 	hl_to_txt(hl)
+
 

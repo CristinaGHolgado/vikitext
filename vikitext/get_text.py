@@ -1,21 +1,14 @@
 """
-Module 2 : Collecte du texte des articles Wikipedia et Vikidia.
+Module 3 : retrieve text from each article
 """
 from bs4 import BeautifulSoup, SoupStrainer
-import numpy as np
 import bs4
 import requests
 import csv
-import re
 import pandas as pd
-import os
-import subprocess
-import pathlib
-import shutil
-import glob
 
 def get_content(f, outname):
-	"""Extraire le contenu des liens des articles
+	"""retrieve text from each article
 	
 	Parameters :
 	------------
@@ -41,7 +34,5 @@ def get_content(f, outname):
 	output_name = "corpus/" + outname + ".tsv"
 	df.to_csv(output_name, sep='\t', encoding='utf8')
 	
-	print("File save in /corpus")
+	print("File(s) saved in /corpus")
 
-
-#get_content("fullset_urls.tsv", "fullset_text")
