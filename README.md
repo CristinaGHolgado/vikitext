@@ -28,12 +28,18 @@ src_links = hyperlinks.get_src_links(viki_link)
 - `get_article_links()` returns the links to every article found
 ```python
 txt_links = article_links.get_article_links("vikidia_src_links.txt") # file generated with src_links
+
+## argument split_nb can be passed to distribute the links over several files containing n number of files.
+## For instance :
+txt_links = article_links.get_article_links("vikidia_src_links.txt", split_nb=200)
+
+## will return a number of files where each one will contain 200 links. This option is recommended.
 ```
 
 
 - The text content of each article can be retrieved using `content()`. A basic cleaning is performed to remove text from non-relevant sections of the article.
 ```python
-text = get_text.content('fullset_urls.tsv','texts') # file generated with txt_links | output file custon name
+text = get_text.content('fullset_urls.tsv','texts') # file generated with txt_links | output file custom name
 ```
   
   

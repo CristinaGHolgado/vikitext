@@ -18,7 +18,7 @@ module 2 : Return each article link from Vikidia alphabetical index
 
 
 def get_article_links(inputfile, split_nb=None):
-	"""Rreturns a text file with links to each article in the wiki domain (/wiki/[article title])
+	"""Returns a text file with links to each article in the wiki domain (/wiki/[article title])
 
 	Parameters :
 	------------
