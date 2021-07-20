@@ -17,7 +17,7 @@ module 2 : Return each article link from Vikidia alphabetical index
 '''
 
 
-def make_linkset(inputfile, split_nb=None):
+def get_article_links(inputfile, split_nb=None):
 	"""Rreturns a text file with links to each article in the wiki domain (/wiki/[article title])
 
 	Parameters :
@@ -32,7 +32,7 @@ def make_linkset(inputfile, split_nb=None):
 	raw_urls_articles = []
 	titles_articles = []
 
-	def get_links():
+	def list_article_links():
 		
 		with open(inputfile, 'r', encoding='utf-8') as f:
 
@@ -52,28 +52,53 @@ def make_linkset(inputfile, split_nb=None):
 					titles_articles.append(link.get('title'))
 					raw_urls_articles.append(link.get('href'))
 
-	get_links()
+	list_article_links()
 
+	# Linkset to df
 	df_articles = pd.concat([pd.DataFrame(titles_articles, columns=['TITLE']),
 							pd.DataFrame(raw_urls_articles, columns=['URL'])], axis=1)
 
-	# Exclude irrelevant/empty urls
+
+	## Filter irrelevant/empty urls
 	df_articles = df_articles.dropna()
 	df_articles = df_articles[~df_articles.TITLE.str.contains("Spécial:Index")]
 	df_articles = df_articles[~df_articles.TITLE.str.contains("Vikidia:")]
 
-	# Add domain
+	filter_items = []
+
+	_ROOT = os.path.abspath(os.path.dirname(__file__))
+	def get_data(path):
+		return os.path.join(_ROOT, 'data', path)
+
+	file = get_data('filter_links_vikidia.txt')
+	
+	with open(file, "r", encoding='utf8') as f:
+		filter_data = f.readlines()
+		for item in filter_data:
+			filter_items.append(item.replace("\n",""))
+
+	df_articles = df_articles[~df_articles['TITLE'].str.contains('|'.join(filter_items))]
+
+
+	## Add domain
 	df_articles['URL_WIKIPEDIA'] = "https://fr.wikipedia.org" + df_articles['URL']
 	df_articles['URL_VIKIDIA'] = "https://fr.vikidia.org" + df_articles['URL']
+
+	print(f"{len(df_articles)} articles links retrieved from Vikidia--Wikipedia. [None/Vikidia:*/Spécial:Index] removed")
 
 	df_articles.to_csv("fullset_urls.tsv", sep='\t', encoding='utf8', index=None, quoting=csv.QUOTE_NONE)
 
 	print()
 
+
+	# split/save
 	if split_nb:
+
 		if isinstance(split_nb, int):
+
 			if os.path.exists('splitted_urls'):
 				shutil.rmtree('splitted_urls')
+
 			if not os.path.exists('splitted_urls'):
 				os.makedirs('splitted_urls')
 			
@@ -86,11 +111,9 @@ def make_linkset(inputfile, split_nb=None):
 			conv = ["bash", "-c", commande_wiki]
 			subprocess.call(conv)
 			print('\n\nFinished. Files saved in `splitted_urls/`')
+
 		else:
 			print("Argument `split_nb` must be an integer")
+
 	else:
 		print("No `split_nb` selected")
-
-
-
-make_linkset("vikidia_hyperlinks.txt")

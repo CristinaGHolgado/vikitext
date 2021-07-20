@@ -1,13 +1,13 @@
 Metadata-Version: 1.2
 Name: vikitext
-Version: 0.0.1
-Summary: Extract article links and text from Wikicommons
+Version: 0.0.2
+Summary: Retrieve article links and text from Vikidia and their equivalents in Wikipedia
 Home-page: https://github.com/CristinaGHolgado/vikitext
 Author: Cristina Garcia Holgado
 Author-email: cristina.garcia-holgado@etu.unistra.fr
 License: MIT
 Description: UNKNOWN
-Keywords: corpus,vikidia,wikicommons
+Keywords: corpus,vikidia,wikicommons,wikipedia
 Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
 Classifier: Operating System :: Microsoft :: Windows

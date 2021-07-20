@@ -8,7 +8,7 @@ module 1 : Return list of hyperlinks from the Vikidia alphabetical index
 _init_link = []
 _clean_init_links = []
 
-def source_hl(init_link):
+def src_links(init_link):
 	'''Scrap links from Vikidia alphabetical index
 	
 	Parameters
@@ -34,7 +34,7 @@ def source_hl(init_link):
 			return False
 
 
-def main_hl():
+def main_links():
 	'''
 	start iteration from last item in list
 	'''
@@ -50,19 +50,19 @@ def main_hl():
 		_clean_init_links.append(init_link_src)
 
 
-def list_hl():
+def list_src_links():
 	'''
 	list all hyperlinks retrieved by iterating through the succeeding Vikidia Index pages starting from the source link
 	'''
-	while source_hl(_clean_init_links[-1]) == True:
-		main_hl()
+	while src_links(_clean_init_links[-1]) == True:
+		main_links()
 		print(_clean_init_links[-1])
 	
 	else:
 		print("Finished")
 
 
-def hl_to_txt(init_link):
+def save_src_links(init_link):
 	'''
 	list of links to text file
 	'''
@@ -73,18 +73,16 @@ def hl_to_txt(init_link):
 	print(f"{len(_clean_init_links)} links retrieved")
 
 # main func
-def get_hyperlinks(hl):
+def get_src_links(hl):
 	'''Run retrieving
 	
 	Parameters
 	----------
 	hl : str
 		Source link from Vikidia alphabetical index. Recommended to hide redirects.
-		Use : https://fr.vikidia.org//w//index.php?title=Sp%C3%A9cial%3AIndex&prefix=&namespace=0&hideredirects=1
+		Use (opt): https://fr.vikidia.org//w//index.php?title=Sp%C3%A9cial%3AIndex&prefix=&namespace=0&hideredirects=1
 	'''
-	source_hl(hl)
-	main_hl()
-	list_hl()
-	hl_to_txt(hl)
-
-
+	src_links(hl)
+	main_links()
+	list_src_links()
+	save_src_links(hl)

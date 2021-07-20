@@ -1,3 +1,4 @@
+LICENCE.txt
 README.md
 setup.py
 vikitext/__main__.py
@@ -10,3 +11,5 @@ vikitext.egg-info/dependency_links.txt
 vikitext.egg-info/not-zip-safe
 vikitext.egg-info/requires.txt
 vikitext.egg-info/top_level.txt
+vikitext/data/filter_links_vikidia.txt
+vikitext/data/vikidia_source.txt
