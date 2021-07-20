@@ -31,6 +31,7 @@ txt_links = article_links.get_article_links("vikidia_src_links.txt") # file gene
 
 ## argument split_nb can be passed to distribute the links over several files containing n number of files.
 ## For instance :
+
 txt_links = article_links.get_article_links("vikidia_src_links.txt", split_nb=200)
 
 ## will return a number of files where each one will contain 200 links. This option is recommended.
