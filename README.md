@@ -41,7 +41,7 @@ text = get_text.content('fullset_urls.tsv','texts') # file generated with txt_li
 Returned text in each row (vikidia_text|wikipedia_text) consists of a list of sentences.
 Note : While it returns text clean of wiki-related noise, a more specific cleaning step will be necessary according to the target task.
 
-|  | TITLE      | URL              | URL_WIKIPEDIA                              | URL_VIKIDIA                          | vikidia_text  | wikipedia_text                   |                                         |
+|  | TITLE      | URL              | URL_WIKIPEDIA                              | URL_VIKIDIA                          | vikidia_text  | wikipedia_text                                        |
 |----|------------|------------------|--------------------------------------------|--------------------------------------|----------------------------------|-----------------------------------------|
 | 0  | 'Pataph... | /wiki/%27Pata... | https://fr.wikipedia.org/wiki/%27Pat...    | https://fr.vikidia.org/wiki/%27Pa... | La ’pataphysique est une sci...  | La ’Pataphysique apparaît dans ...      |
 | 1   | Belenos    | /wiki/Bele...    | https://fr.wikipedia.org/wiki/(11284)_B... | https://fr.vikidia.org/wiki/(112... | Belenos est un astéroïde ...     | Belenos, désignation internat... |
