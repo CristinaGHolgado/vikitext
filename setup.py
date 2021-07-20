@@ -1,13 +1,13 @@
 import setuptools
 from setuptools import setup, find_packages
 
-VERSION = '0.0.3'
+VERSION = '0.0.4'
 DESCRIPTION = 'Retrieve article links and text from Vikidia and their equivalents in Wikipedia'
 LONG_DESCRIPTION = 'A packgage to build a parallel corpus with articles from Vikidia and Wikipedia only for research purposes (e.g. readability analysis, text simplification). Only Vikidia articles with Wikipedia equivalents are downloaded.'
 
 setup(
 	name = 'vikitext',
-	version = '0.0.3',
+	version = '0.0.4',
 	author = 'Cristina Garcia Holgado',
 	author_email = 'cristina.garcia-holgado@etu.unistra.fr',
 	description = DESCRIPTION,
