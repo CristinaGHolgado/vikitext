@@ -3,7 +3,7 @@
 `pip install vikitext`
 
 ## **Overview**
-This package allows to easily build a parallel corpus with Vikidia and Wikipedia articles. In other words, a parallel corpus of simple and complex texts. It is mainly designed for research purposes such as readability analysis or text simplification.
+This package allows to easily build a parallel corpus with Vikidia and Wikipedia articles. In other words, a parallel corpus of simple and complex texts. It is mainly designed for research purposes such as readability analysis or text simplification. Only Vikidia articles with Wikipedia equivalents are retrieved.
 
 ## **Quickstart**
 
